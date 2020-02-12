@@ -1,0 +1,6 @@
+*** Settings ***
+Resource          moduleName_Data.txt
+Resource          moduleName_Element.txt
+Resource          ../../../CustomerLib/pub_Flow.txt
+
+*** Keywords ***

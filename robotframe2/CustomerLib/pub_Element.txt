@@ -1,0 +1,6 @@
+*** Variables ***
+# 里面都是存放定位的元素方法
+# 例如下面几个，只是注释掉了
+${btn_Yes}        xpath=//span[contains(text(), '是')]    # 确认dialog中的"是"按钮
+${btn_No}         xpath=//span[contains(text(), '否')]    # 确认dialog中的"否"按钮
+${iframe_viewer}    id=viewerIframe    # 预览界面的iframe

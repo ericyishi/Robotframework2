@@ -1,0 +1,10 @@
+*** Settings ***
+Resource          pub_Action.txt
+
+*** Keywords ***
+TestSetUp
+    [Documentation]    注释，通常flow是一组action组组成，而pub代表的是常用的公用方法
+    ...    如果需要多行，使用...即可
+    ...    多行2
+    ...    多行3
+    ${LOG_FILE}    这是TestSetUp

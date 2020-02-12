@@ -1,0 +1,11 @@
+*** Settings ***
+Library           DateTime
+Resource          pub_Data.txt
+Resource          pub_Element.txt
+
+*** Keywords ***
+获取当前时间戳
+    ${current_date} =    Get Current Date
+    ${date} =    Convert Date    ${current_date}    datetime
+    ${timestamp}=    Set Variable    ${date.year}${date.month}${date.day}_${date.hour}_${date.minute}_${date.second}
+    [Return]    ${timestamp}    #当前时间戳

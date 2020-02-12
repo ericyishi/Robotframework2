@@ -1,0 +1,2 @@
+*** Variables ***
+${sleep_time}     2    # 休眠时间

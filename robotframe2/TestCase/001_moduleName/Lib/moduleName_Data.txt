@@ -1,0 +1,4 @@
+*** Variables ***
+${newThemeName}    大鹏展翅
+${DBTypeCount}    57    # 组件类型个数
+&{textInput}      normal=<p>Text to be send in</p>    complex_h5=aaa

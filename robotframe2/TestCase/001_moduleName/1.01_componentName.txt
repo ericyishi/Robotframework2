@@ -1,0 +1,42 @@
+*** Setting ***
+Documentation     *component1的冒烟用例*
+Test Setup        TestSetup
+Test Teardown
+Force Tags        user_aaa
+Resource          ./Lib/moduleName_Flow.txt
+
+*** Test Cases ***
+001_component1_这是组件1的第一个测试用例
+    [Documentation]    【Precondition】
+    ...
+    ...    【Action】
+    ...    1.
+    ...    2.
+    ...    3.
+    ...    4.
+    ...    【Expected Result】
+    ...    3.
+    ...    4.
+    ...    username@2018.10.11
+    [Tags]    user_aaa    smoke    component_001
+    #    Sleep    ${sleep_time}
+    #    ${timestamp}    获取当前时间戳
+    #    Log    ${timestamp}
+    Log    123
+
+002_component2_这是组件2的第一个测试用例
+    [Documentation]    【Precondition】
+    ...
+    ...    【Action】
+    ...    1.
+    ...    2.
+    ...    3.
+    ...    4.
+    ...    【Expected Result】
+    ...    3.
+    ...    4.
+    ...    username@2018.10.11
+    [Tags]    user_aaa    smoke    component_001
+    Sleep    ${sleep_time}
+    ${timestamp}    获取当前时间戳
+    Log    ${timestamp}

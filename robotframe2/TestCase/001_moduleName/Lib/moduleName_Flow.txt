@@ -1,0 +1,4 @@
+*** Settings ***
+Resource          moduleName_Action.txt    # 用于存放当前模块的action
+
+*** Keywords ***
