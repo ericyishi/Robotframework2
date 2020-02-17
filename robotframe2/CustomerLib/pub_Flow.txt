@@ -7,4 +7,4 @@ TestSetUp
     ...    如果需要多行，使用...即可
     ...    多行2
     ...    多行3
-    ${LOG_FILE}    这是TestSetUp
+    log    这是TestSetUp

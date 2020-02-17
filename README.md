@@ -35,4 +35,50 @@
   1. 通常用例只引用当前模块Lib下Flow，而Flow只引用Action
   2. 而Action会去引用pub_Flow,以及当前模块的Element和Data
   
-
+### 传入参数
+* 参数是不会显示在代码里的，使用RIDE或者pycharm的配置的位置略有不同
+* 例如我们以改变输出报告的路径为例
+  1. 使用RIDE
+     * 切换至“RUN”面板，在Arguments空格中输入：“-d reports”,这样就能在项目下新建一个reports文件夹，然后将log、report文件存在该文件夹下了。
+  2. 使用Pycharm。更多参考：[相关网站图文说明](https://blog.csdn.net/liuyuqing2018/article/details/82773552)
+     1. 需要先安装配置插件intelliBot
+        ```
+          菜单左上角点击 File>> Settings… 进入配置界面；
+          进入Settings后，选择Plugins，在搜索栏输入intelliBot，点击下方Browse repositories 按钮。
+        ```   
+     2. 选择版本，点击install。安装完成后，根据引导重启
+     3. RobotFramework的文件类型识别配置
+        ```
+         点击File>> Settings，选择Editor >> File Types ，
+         在列表栏中找到 Robot Feature 选中，
+         再点击右边栏上的加号，添加支持类型,分别添加 *.txt 和 *.
+        ```
+     4. **suite和case的执行配置**
+        * 在我们在执行脚本时，可以单独执行一个case，也可以执行case的集合：suite（测试套），所以我们这里要做两个配置。
+        1. Settings--选择External Tools，点击加号，添加可执行配置
+        2. 配置单条case的执行：
+           ```
+            格式说明：
+             Name：Robot Run SingleTestCase
+             Program：pybot.bat path
+             Arguments：-d results -t “SelectedText SelectedTextSelectedText” ./
+             Working directory：FileDir FileDirFileDir
+            实际配置：
+             Name:Robot-run-testCase 
+             Program:C:\Python27\Scripts\pybot.bat
+             Arguments:-d $ProjectFileDir$\Reports -L Trace -t "$SelectedText$" TestCase 
+             Workling directory:$ProjectFileDir$
+           ```
+        3. 配置suite（测试套）的执行：
+           ```
+            格式说明：
+            Name：Robot Run TestSuite
+            Program：pybot.bat path
+            Arguments：-d results FileName FileNameFileName
+            Working directory：FileDir FileDirFileDir
+            实际配置：
+            Name：Robot-run-testSuite 
+            Program：C:\Python27\Scripts\pybot.bat
+            Arguments：-d $ProjectFileDir$\Reports  -L Trace $FileName$ 
+            Arguments：$FileDir$
+           ```
