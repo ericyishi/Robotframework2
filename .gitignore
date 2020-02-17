@@ -1,3 +1,6 @@
 .idea/
 robotframe2/.idea/
 robotframe2/Reports/
+geckodriver.log
+robotframe2/CustomerLib/TestLibrary.png
+*.pyc
