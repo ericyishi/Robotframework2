@@ -9,9 +9,10 @@
    |  |
    |  |----CusLibrary
    |  |  |
-   |  |  |----__init__.py【CusLibrary包的一些初始化信息，自定义类在此进行整合】
+   |  |  |----__init__.py【CusLibrary包的一些初始化信息，暴露接口】
    |  |  |----CusBase.py 【继承Selenium2Library库对其进行修改封装】
    |  |  |----MySelenium.py【自定义类，继承CusBase】
+   |  |  |----ImageCompare.py【自定义类，继承CusBase，用于比较图像】
    |  |  
    |  |
    |  |
@@ -39,8 +40,9 @@
    |        |---moduleName_Element.txt【2.元素层，用于界面要控制的元素】
    |        |---moduleName_Flow.txt【4.流程层，是把多个动作拼在一起】
    |   
-   |      
-   
+   |----TestData【测试数据】      
+   |  |
+   |  |---Screen【图像对比文件夹】
    
 ```
 * 资源Resource和库Library的引用
