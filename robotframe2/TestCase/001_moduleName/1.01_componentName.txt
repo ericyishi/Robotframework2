@@ -24,7 +24,7 @@ Resource          ./Lib/moduleName_Flow.txt
     #    Log    ${timestamp}
     Log    123
 
-002_component2_这是组件2的第一个测试用例
+002_component1_这是组件2的第一个测试用例
     [Documentation]    【Precondition】
     ...
     ...    【Action】
@@ -40,3 +40,18 @@ Resource          ./Lib/moduleName_Flow.txt
     Sleep    ${sleep_time}
     ${timestamp}    获取当前时间戳
     Log    ${timestamp}
+
+003_component1_测试打开浏览器
+    [Documentation]    【Precondition】
+    ...
+    ...    【Action】
+    ...    1.
+    ...    2.
+    ...    3.
+    ...    4.
+    ...    【Expected Result】
+    ...    3.
+    ...    4.
+    ...    username@2018.10.11
+    [Tags]    user_aaa    smoke
+    Browser Init

@@ -46,7 +46,6 @@ class MySelenium(CusBase):
 
 if __name__ == '__main__':
     running_param = {
-        'BASE_URL': 'http://127.0.0.1:8071/bi/Viewer',
         'BROWSER': 'firefox',
         'DELAY': 1,
     }

@@ -1,4 +1,5 @@
 *** Settings ***
+Library           ../CustomerLib/    ${running_case_para}    run_on_failure=Capture Page Screenshot
 Library           DateTime
 Resource          pub_Data.txt
 Resource          pub_Element.txt
@@ -9,3 +10,20 @@ Resource          pub_Element.txt
     ${date} =    Convert Date    ${current_date}    datetime
     ${timestamp}=    Set Variable    ${date.year}${date.month}${date.day}_${date.hour}_${date.minute}_${date.second}
     [Return]    ${timestamp}    #当前时间戳
+
+Browser Init
+    log    ${login_url}
+    log    ${browser}
+    Run Keyword If    '${browser}' == 'ff'    Open Browser    ${login_url}    ${browser}
+    ...    ELSE IF    '${browser}' == 'Chrome'    Create Webdriver    ${browser}
+    ...    ELSE        Open Browser    ${login_url}    ${browser}
+    Go To    ${login_url}
+    Set Window Position    -8    -8
+    Set Window Size    1380    744
+    Set Selenium Timeout    5
+    Set Selenium Implicit Wait    5
+    Set Selenium Speed    ${delay_time}
+    Set Screenshot Directory    ${screenshot_dir}    persist=True  #设置截图路径，persist=True让以后的用例都使用该路径存放
+    ${timestamp}    获取当前时间戳
+    Set Global Variable    ${timestamp}    ${timestamp}
+

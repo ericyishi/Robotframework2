@@ -12,5 +12,7 @@ base_path = os.path.dirname(__file__)
 running_case_para = {
     'BROWSER': 'Chrome',#Chrome|ff
     'DELAY': 0.5,
+    'BASE_URL':'https://www.baidu.com/',
+    'screenshot_dir': base_path + '/TestData/Screen/Result'
 }
 

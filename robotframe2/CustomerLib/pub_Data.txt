@@ -1,2 +1,6 @@
 *** Variables ***
 ${sleep_time}     2    # 休眠时间
+${browser}    ${running_case_para['BROWSER']}
+${login_url}      ${running_case_para['BASE_URL']}
+${delay_time}     ${running_case_para['DELAY']}
+${screenshot_dir}    ${running_case_para['screenshot_dir']}
