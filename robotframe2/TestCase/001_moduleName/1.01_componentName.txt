@@ -1,7 +1,7 @@
 *** Setting ***
 Documentation     *component1的冒烟用例*
 Test Setup        TestSetup
-Test Teardown
+Test Teardown     TestTearDown
 Force Tags        user_aaa
 Resource          ./Lib/moduleName_Flow.txt
 
@@ -55,3 +55,4 @@ Resource          ./Lib/moduleName_Flow.txt
     ...    username@2018.10.11
     [Tags]    user_aaa    smoke
     Browser Init
+    CompareDB    aaa    test

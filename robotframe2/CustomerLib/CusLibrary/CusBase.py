@@ -6,6 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from robot.libraries.BuiltIn import BuiltIn
 class CusBase(Selenium2Library):
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     def __init__(self,
                  running_param,
                  timeout=5.0,

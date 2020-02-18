@@ -4,3 +4,6 @@ ${browser}    ${running_case_para['BROWSER']}
 ${login_url}      ${running_case_para['BASE_URL']}
 ${delay_time}     ${running_case_para['DELAY']}
 ${screenshot_dir}    ${running_case_para['screenshot_dir']}
+${rms_threshold_global}    10    #比对标准图片和实际结果图片的RMS极限值
+${picture_compare_flag_smoke}    True
+${picture_compare_flag_global}    True    #boolen类型[True/False]，是否将实际结果图片和预期图片进行对比的标志位.为True代表需要截图对比

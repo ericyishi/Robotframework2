@@ -8,3 +8,41 @@ TestSetUp
     ...    多行2
     ...    多行3
     log    这是TestSetUp
+
+CompareDB
+    [Arguments]    ${DB_name}    ${DB_folder_name}    ${picture_compare_flag}=${picture_compare_flag_global}    ${rms_threshold}=${rms_threshold_global}    # 要比较的DB
+    [Documentation]    在查看报告页面中的DB_Folder_name文件夹中搜索DB_name,比截图对比
+    ...    DB_name:要搜索的DB名称
+    ...    DB_folder_name:DB文件夹名称，默认为空
+    ...    compare_flag:是否将实际结果图片和预期图片进行对比,默认为True
+    ...    rms_threshold: 比对标准图片和实际结果图片的RMS极限值
+    ...    不支持遍历查找
+    Run Keyword If    "${DB_folder_name}"=="${EMPTY}"    SaveAndComparePicture    ${DB_name}    ${picture_compare_flag}    ${rms_threshold}
+    ...    ELSE    SaveAndComparePicture    ${DB_folder_name}${/}${DB_name}    ${picture_compare_flag}    ${rms_threshold}
+
+SaveAndComparePicture
+    [Arguments]    ${picture_name}    ${picture_compare_flag}=${picture_compare_flag_global}    ${rms_threshold}=${rms_threshold_global}
+    [Documentation]    保存并比对图片,如果不一样,则测试Fail,反之亦然
+    ...    picture_name:保存的图片名称，不带.png
+    ...    picture_compare_flag:是否将实际结果图片和预期图片进行对比
+    ...    rms_threshold: 比对标准图片和实际结果图片的RMS极限值
+
+    MouseMove    0    0    0    #将鼠标移动到截图区域外，规避截图时鼠标位置不同，触发界面hover等,从而避免图像差异
+    Sleep    ${sleep_time}
+    Capture Page Screenshot    ${picture_name}.png
+    Run Keyword If    ${picture_compare_flag}    Picture Should Be Same    ${picture_name}    ${picture_name}    ${rms_threshold}
+    Sleep    ${sleep_time}
+
+
+Picture Should Be Same
+    [Arguments]    ${expect_picture_name}    ${result_picture_name}    ${rms_threshold}=${rms_threshold_global}
+    [Documentation]    比对图片,如果不一样,则测试Fail,反之亦然
+    ...    expect_picture_name:对比标准的图片名称
+    ...    result_picture_name:实际结果的图片名称
+    ...    rms_threshold: 比对标准图片和实际结果图片的RMS极限值
+    ${status}=    Picture Compare    ${expect_picture_name}    ${result_picture_name}    ${rms_threshold}
+    Run Keyword Unless    ${status}    Fail
+
+TestTearDown
+    [Documentation] 关闭浏览器
+    Close All Browsers

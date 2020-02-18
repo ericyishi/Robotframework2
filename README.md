@@ -19,7 +19,7 @@
    |  |
    |  |
    |  |---__init__.txt【动态引入env_param模块，读取参数running_param，并在public_Action中引用】
-   |  |---pub_Action.txt【这里引入Library           ../CustomerLib/    ${running_case_para}    run_on_failure=Capture Page Screenshot使用ride查看是会显示红色的，但不影响使用】
+   |  |---pub_Action.txt【这里引入Library ../CustomerLib/ ${running_case_para} run_on_failure=Capture Page Screenshot使用ride查看是会显示红色的，但不影响使用】
    |  |---pub_Data.txt
    |  |---pub_Data.txt
    |  |---pub_Flow.txt   
@@ -98,3 +98,4 @@
 ### 注意事项
 1. 自定义关键字，在python代码中定义函数名为：aaa_bbb_ccc，但是在关键字使用的时候会是：Aaa Bbb Ccc。例如 copy_drivers_to_local,使用时候为Copy Drivers To Local          
 2. 注意：在RIDE里面配置路径的时候必须要写绝对路径，而是用pycharm的参数是不对的，如：$ProjectFileDir$\Reports
+3. 引入资源的时候注意下顺序，如果顺序不对也会导致一些变量找不到

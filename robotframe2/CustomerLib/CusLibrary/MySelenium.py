@@ -5,6 +5,7 @@ import sys
 
 from CusBase import CusBase
 class MySelenium(CusBase):
+    ROBOT_LIBRARY_SCOPE = 'GLOBAL'
     """
     用户自定义的类
     """

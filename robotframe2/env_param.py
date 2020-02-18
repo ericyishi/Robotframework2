@@ -13,6 +13,9 @@ running_case_para = {
     'BROWSER': 'Chrome',#Chrome|ff
     'DELAY': 0.5,
     'BASE_URL':'https://www.baidu.com/',
-    'screenshot_dir': base_path + '/TestData/Screen/Result'
+    'screenshot_dir': base_path + '/TestData/Screen/Result',
+    'expect_picture_dir': base_path + '/TestData/Screen/Expect',
+    'result_picture_dir': base_path + '/TestData/Screen/Result',
+    'diff_picture_dir': base_path + '/TestData/Screen/Diff',
 }
 

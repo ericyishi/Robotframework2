@@ -1,10 +1,11 @@
 #-*- coding: utf-8 -*-
 import os
 
+from ImageCompare import ImageCompare
 from MySelenium import MySelenium
 
 
-class CusLibrary(MySelenium):
+class CusLibrary(MySelenium,ImageCompare):
     """
     用户自定义的Libraries
     """
