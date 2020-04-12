@@ -26,13 +26,11 @@ SaveAndComparePicture
     ...    picture_name:保存的图片名称，不带.png
     ...    picture_compare_flag:是否将实际结果图片和预期图片进行对比
     ...    rms_threshold: 比对标准图片和实际结果图片的RMS极限值
-
     MouseMove    0    0    0    #将鼠标移动到截图区域外，规避截图时鼠标位置不同，触发界面hover等,从而避免图像差异
     Sleep    ${sleep_time}
     Capture Page Screenshot    ${picture_name}.png
     Run Keyword If    ${picture_compare_flag}    Picture Should Be Same    ${picture_name}    ${picture_name}    ${rms_threshold}
     Sleep    ${sleep_time}
-
 
 Picture Should Be Same
     [Arguments]    ${expect_picture_name}    ${result_picture_name}    ${rms_threshold}=${rms_threshold_global}
@@ -44,5 +42,5 @@ Picture Should Be Same
     Run Keyword Unless    ${status}    Fail
 
 TestTearDown
-    [Documentation] 关闭浏览器
+    [Documentation]    关闭浏览器
     Close All Browsers

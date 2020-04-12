@@ -1,2 +1,2 @@
 *** Settings ***
-Library           Selenium2Library
+Library           Selenium2Library    implicit_wait=5
