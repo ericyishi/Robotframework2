@@ -3,7 +3,6 @@ import os
 import sys
 from CusLibrary import CusLibrary
 
-
 class CustomerLib(CusLibrary):
     """
     TestLibrary class, include all the methods
@@ -23,18 +22,24 @@ class CustomerLib(CusLibrary):
                                           screenshot_root_directory=None
                                           )
         current_dir = os.path.dirname(__file__)
-        print "current_dir:"+current_dir # D:/yishi/git/robotframework/robotframe2/CustomerLib
+        print "current_dir:" +current_dir   #D:/yishi/git/robotframework/robotframe2/CustomerLib
         sys.path.append(current_dir[:current_dir.find('CustomerLib')]) #放入到sys.path里面
         # current_dir[:current_dir.find('TestLibrary')] 先返回TestLibrary的索引，然后使用切片反向获取TestLibrary之前路径
-        print current_dir[:current_dir.find('CustomerLib')]# D:/yishi/git/robotframework/robotframe2/
+        print current_dir[:current_dir.find('CustomerLib')] # D:/yishi/git/robotframework/robotframe2/
         print sys.path
         env_module = __import__('env_param') #动态引入env_param模块
         self.running_param = getattr(env_module, 'running_case_para')
 
 if __name__ == '__main__':
+    base_path = os.path.dirname(__file__)
     running_param = {
         'BROWSER': 'Chrome',
         'DELAY': 1,
+        'BASE_URL': 'https://www.baidu.com/',
+        'screenshot_dir': base_path + '/TestData/Screen/Result',
+        'expect_picture_dir': base_path + '/TestData/Screen/Expect',
+        'result_picture_dir': base_path + '/TestData/Screen/Result',
+        'diff_picture_dir': base_path + '/TestData/Screen/Diff'
     }
     test = CustomerLib(running_param,
                        timeout=5.0,

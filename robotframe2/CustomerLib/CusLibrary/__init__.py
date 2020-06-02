@@ -5,6 +5,7 @@ from ImageCompare import ImageCompare
 from MySelenium import MySelenium
 
 
+
 class CusLibrary(MySelenium,ImageCompare):
     """
     用户自定义的Libraries
@@ -25,9 +26,16 @@ class CusLibrary(MySelenium,ImageCompare):
                                          )
         self.running_param = running_param
 if __name__ == '__main__':
+    base_path = os.path.dirname(__file__)
     running_param = {
         'BROWSER': 'Chrome',
         'DELAY': 1,
+        'BASE_URL': 'https://www.baidu.com/',
+        'screenshot_dir': base_path + '/TestData/Screen/Result',
+        'expect_picture_dir': base_path + '/TestData/Screen/Expect',
+        'result_picture_dir': base_path + '/TestData/Screen/Result',
+        'diff_picture_dir': base_path + '/TestData/Screen/Diff'
+
     }
     test = CusLibrary(running_param,
                       timeout=5.0,

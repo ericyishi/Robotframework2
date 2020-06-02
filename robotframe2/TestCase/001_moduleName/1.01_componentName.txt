@@ -56,3 +56,4 @@ Resource          ./Lib/moduleName_Flow.txt
     [Tags]    user_aaa    smoke
     Browser Init
     CompareDB    aaa    test
+
