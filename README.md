@@ -102,19 +102,108 @@
             Arguments：$FileDir$
            ```
 ### 使用自定义库的关键字
-```buildoutcfg
+* ROBOT_LIBRARY_SCOPE = 'GLOBAL' 用途，参考：http://blog.sina.com.cn/s/blog_71bc9d680102xbew.html
+* 引入包的方式：
+  1. 方式一
+      ```buildoutcfg
+        在一个非package目录下面，
+        新建一个FullScreenSwipeLibrary.py文件，
+        文件中新建一个类名字叫做FullScreenSwipeLibrary，
+        在robot framework中导入库是可以直接写FullScreenSwipeLibrary引入library
+        （ps：目录必须要在syspath下面；或者父目录在syspath下面，可以使用parent.FullScreenSwipeLibrary进行引入）
+    
+      ```
+      ```buildoutcfg
+        # 自定义库MyRobotFrameworkLib.py
+         # coding=utf8
+           import time
+           class MyRobotFrameworkLib():
+               ROBOT_LIBRARY_SCOPE = "GLOBAL"
+               def __init__(self):
+                   pass
 
-  from MyRobotFrameworkLib import *
-  
-  class MyLib(MyRobotFrameworkLib):
-      ROBOT_LIBRARY_SCOPE = "GLOBAL"
-      def 
-```          
+
+           #获取当前时间
+           def get_current_time(self):
+               current_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+               return current_time
+          
+       # suite引入该库
+         *** Settings ***
+         Library           MyRobotFrameworkLib
+         
+         *** Test Cases ***
+         a
+             ${nowTime}    get current time
+             log    ${nowTime}
+          
+      ```
+      * 对于多个自定义类，也可以找一个文件来继承，而不用每个单独引用
+        ```buildoutcfg
+         # 自定义库1【MyRobotFrameworkLib.py】
+            # coding=utf8
+           import time
+           class MyRobotFrameworkLib():
+            
+               def __init__(self):
+                   pass
+           
+           
+               #获取当前时间
+               def get_current_time(self):
+                   current_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+                   return current_time
+         #  自定义库2【MyRobotFrameworkLib2.py】
+            # coding=utf8
+           import time
+           class MyRobotFrameworkLib2():
+            
+               def __init__(self):
+                   pass
+           
+           
+               #获取当前时间
+               def get_current_time2(self):
+                   current_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+                   return current_time           
+         
+         # 汇总两个自定义库，然后设为全局范围，让suite引入该Library【MyLib.py】
+           # coding=utf8
+            from MyRobotFrameworkLib import *
+            from MyRobotFrameworkLib2 import *
+            class MyLib(MyRobotFrameworkLib,MyRobotFrameworkLib2):
+                ROBOT_LIBRARY_SCOPE = "GLOBAL"
+ 
+         # 在suite里面引入
+           *** Settings ***
+             Library           MyLib
+             
+             *** Test Cases ***
+             a
+                 ${nowTime}    get current time
+                 log    ${nowTime}
+             
+             b
+                 ${nowTime}    get current time2
+                 log    ${nowTime}
+             
+        ```
+  2. 方式二
+     * 网上一堆都是这样的方法https://www.cnblogs.com/fnng/p/4261293.html
+     ```buildoutcfg
+       首先在FullScreenSwipeLibrary目录下面加入__init__.py文件，
+       这个目录就会变成一个package，
+       在__init__.py中实现了名字和包名相同的类，
+       那在导入库的时候，就只需要输入FullScreenSwipeLibrary即可
+
+     ```
+* 注意ride需要重启一次才会界面生效，关键字变颜色等
+      
 ### 注意事项
 1. 自定义关键字，在python代码中定义函数名为：aaa_bbb_ccc，但是在关键字使用的时候会是：Aaa Bbb Ccc。例如 copy_drivers_to_local,使用时候为Copy Drivers To Local          
 2. 注意：在RIDE里面配置路径的时候必须要写绝对路径，而是用pycharm的参数是不对的，如：$ProjectFileDir$\Reports
 3. 引入资源的时候注意下顺序，如果顺序不对也会导致一些变量找不到
-
+4. 驱动位置，可以显示指明，或者加入到环境变量下，通常做法是放在python安装目录下，因为该路径是加入到环境变量中的
 ### 其他
 * 子类如果想使用父类init里面的属性或者在父类基础上再增加新属性，除了需要继承外，还需要显示调用父类的init方法才可以使用
    ```buildoutcfg
