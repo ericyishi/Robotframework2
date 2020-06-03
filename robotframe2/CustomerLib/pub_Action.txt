@@ -27,3 +27,52 @@ Browser Init
     Set Screenshot Directory    ${screenshot_dir}    persist=True    #设置截图路径，persist=True让以后的用例都使用该路径存放
     ${timestamp}    获取当前时间戳
     Set Global Variable    ${timestamp}    ${timestamp}
+
+DragElement
+    [Arguments]    ${sourceEle}    ${targetEle}    ${offsetH}=0      ${offsetV}=0      ${sourceH}=0      ${sourceV}=0
+    [Documentation]     使用autoit来拖拽元素
+    ...    sourceEle:源元素
+    ...    targetEle：目标元素
+    ...    offsetH:目标元素的水平偏移
+    ...    offsetV:目标元素的垂直偏移
+    ...    sourceH:源元素的水平偏移
+    ...    sourceV:源元素的垂直偏移
+    ...    Get Vertical Position等方法是appium提供的
+    Wait Until Page Contains Element    ${sourceEle}
+    ${status}=    Run Keyword And Return Status    Wait For Active Window    设置主页   TimeOut=2
+    Run Keyword If    "${status}"=='True'    Dismiss Alert
+    ${source_y}    Get Vertical Position    ${sourceEle}
+    ${source_x}    Get Horizontal Position    ${sourceEle}
+    @{source_size}    Get Element Size    ${sourceEle}
+    ${target_x}    Get Horizontal Position    ${targetEle}
+    ${target_y}    Get Vertical Position    ${targetEle}
+    @{target_size}    Get Element Size    ${targetEle}
+    ${browser_toolsHeight}    Execute Javascript    return window.outerHeight-window.innerHeight
+    # 获取浏览器上方工具栏的高度，因为autoit坐标系是按屏幕左上角算起，而selenium是按浏览器可视区域
+    unselect frame
+    ${home_hidebar}    Get Element Size    ${left_navi_bar}
+    Select Frame    ${iframe_homepage}
+    # 横轴需要加上左侧导航栏，纵轴需要加上浏览器toolbar高度
+    ${s_x}    evaluate    int(${source_x}+@{source_size}[0]/2+${home_hidebar}[0]+${sourceH})
+    ${s_y}    evaluate    int(${source_y}+@{source_size}[1]/2+${browser_toolsHeight}+${sourceV})
+    ${t_x}    evaluate    int(${target_x}+@{target_size}[0]/2+${home_hidebar}[0]+${offsetH})
+    ${t_y}    evaluate    int(${target_y}+@{target_size}[1]/2+${browser_toolsHeight})+${offsetV}
+    Mouse Click Drag    left    ${s_x}    ${s_y}    ${t_x}    ${t_y}
+    Sleep    ${delay_time}
+    AutoItLibrary.Mouse Up
+    Sleep    ${sleep_time}
+
+actClickElement
+    [Arguments]    ${sourceEle}
+    [Documentation]     使用autoit来点击元素
+    ...    sourceEle:源元素
+
+    Wait Until Page Contains Element    ${sourceEle}
+    ${source_x}    Get Horizontal Position    ${sourceEle}
+    ${source_y}    Get Vertical Position    ${sourceEle}
+    @{source_size}    Get Element Size    ${sourceEle}
+    ${browser_toolsHeight}    Execute Javascript    return window.outerHeight-window.innerHeight    # 获取浏览器工具栏的高度，因为autoit坐标系是按屏幕左上角算起，而selenium是按浏览器可视区域
+    log    ${browser_toolsHeight}
+    ${s_x}    evaluate    int(${source_x}+@{source_size}[0]/2)
+    ${s_x}   evaluate    int(${source_y}+@{source_size}[1]/2+${browser_toolsHeight})
+    MouseClick("left", ${s_x}, ${s_x} , 1)
