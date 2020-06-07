@@ -198,7 +198,9 @@
 
      ```
 * 注意ride需要重启一次才会界面生效，关键字变颜色等
-      
+### 错误截图  
+1. 可以在用例teardown的时候截图
+2. 也可以使用引入robotframework-appiumlibrary库，run_on_failure='Capture Page Screenshot'时候截图  
 ### 注意事项
 1. 自定义关键字，在python代码中定义函数名为：aaa_bbb_ccc，但是在关键字使用的时候会是：Aaa Bbb Ccc。例如 copy_drivers_to_local,使用时候为Copy Drivers To Local          
 2. 注意：在RIDE里面配置路径的时候必须要写绝对路径，而是用pycharm的参数是不对的，如：$ProjectFileDir$\Reports
@@ -239,4 +241,5 @@
    ```
    * 在Python2中，super()的完整用法是 super(自己类名，self).__init__()
    * Python3中可以简写为 super().__init__()
-     
+ 
+   
